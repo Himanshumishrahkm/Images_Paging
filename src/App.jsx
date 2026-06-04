@@ -3,9 +3,16 @@ import { useEffect, useState } from 'react'
 
 const App = () => {
 
+  
 
   const [links, setLinks] = useState([])
-  const [pageValue, setPageValue] = useState(1)
+  const [pageValue, setPageValue] = useState(Number(localStorage.getItem("value")) || 1)
+
+  
+
+ 
+  
+
   
   const GetData = async()=>
   {
@@ -25,6 +32,7 @@ const App = () => {
 
   useEffect(function(){
     GetData();
+    const storage = localStorage.setItem("value",pageValue);
   },[pageValue])
 
   return (
@@ -52,14 +60,22 @@ const App = () => {
         <button 
         onClick={()=>{
           if(pageValue > 1)
-          setPageValue(pageValue-1)
+          {
+          setPageValue( pageValue-1)
+          
+          }
+
+          
 
         }}
         className='w-[80px] bg-mist-400 p-1 rounded-2xl'>Prev</button>
         <h4>page no {pageValue}</h4>
         <button
          onClick={()=>{
+          
           setPageValue(pageValue+1)
+
+          
         }}
         className='w-[80px] bg-mist-400 p-1 rounded-2xl'>Next</button>
       </div>
